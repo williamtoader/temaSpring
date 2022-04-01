@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface OrderRepository extends CrudRepository<ClientOrder, Long> {
-    public List<ClientOrder> getAllByCustomer_Id(Long customerId);
+    public Iterable<ClientOrder> getClientOrderByCustomer_Id(Long id);
 }

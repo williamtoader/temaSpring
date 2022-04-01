@@ -13,7 +13,7 @@ public class CustomerController {
     @Autowired
     CustomerService service;
 
-    @PostMapping("/customer")
+    @PutMapping("/customer")
     public Customer createCustomer(@RequestBody Customer customer) {
         return service.addCustomer(customer);
     }

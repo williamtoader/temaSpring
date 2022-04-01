@@ -13,6 +13,9 @@ public class OrderService {
     @Autowired
     OrderRepository repository;
 
+    @Autowired
+    CustomerService customerService;
+
     public Iterable<ClientOrder> getAllOrders() {
         return repository.findAll();
     }
@@ -30,10 +33,16 @@ public class OrderService {
     }
 
     public ClientOrder addOrder(OrderCreateDTO dto) {
-        return repository.save(dto.createOrderObject());
+        return repository.save(new ClientOrder(dto.orderText, customerService.getCustomerById(dto.customerId)));
     }
 
-    public List<ClientOrder> getAllOrdersForCustomerId(Long customerId) {
-        return repository.getAllByCustomer_Id(customerId);
+    public ClientOrder updateOrder(Long id, OrderCreateDTO dto) {
+        ClientOrder order = new ClientOrder(dto.orderText, customerService.getCustomerById(dto.customerId));
+        order.setId(id);
+        return repository.save(order);
+    }
+
+    public Iterable<ClientOrder> getAllOrdersForCustomerId(Long customerId) {
+        return repository.getClientOrderByCustomer_Id(customerId);
     }
 }

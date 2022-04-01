@@ -12,13 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderCreateDTO {
-    @Autowired
-    CustomerService service;
-
-    public ClientOrder createOrderObject() {
-        return new ClientOrder(this.orderText , service.getCustomerById(customerId));
-    }
 
     public String orderText;
     public Long customerId;
+
 }

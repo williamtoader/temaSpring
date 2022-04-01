@@ -1,9 +1,11 @@
 package com.example.temaspring.model;
 
+import com.example.temaspring.services.CustomerService;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 
