@@ -16,7 +16,6 @@ import javax.persistence.*;
 public class OrderDetails {
     public OrderDetails(OrderDetailsDTO dto) {
         this.id = dto.getId();
-        this.orderId = dto.getOrderId();
         this.price = dto.getPrice();
         this.quantity = dto.getQuantity();
     }
@@ -25,8 +24,6 @@ public class OrderDetails {
     @NotNull
     @GeneratedValue
     private Long id;
-
-    private Long orderId;
 
     Double price;
     Integer quantity;
