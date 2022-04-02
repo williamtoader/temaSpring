@@ -1,26 +1,26 @@
 package com.example.temaspring.controllers;
 
-import com.example.temaspring.dto.OrderCreateDTO;
+import com.example.temaspring.dto.OrderDTO;
 import com.example.temaspring.model.ClientOrder;
+import com.example.temaspring.model.OrderDetails;
+import com.example.temaspring.services.OrderDetailsService;
 import com.example.temaspring.services.OrderService;
 import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 public class OrderController {
     @Autowired
     OrderService service;
-    @PutMapping("/order")
-    public ClientOrder addOrder(@RequestBody OrderCreateDTO dto) {
-        return service.addOrder(dto);
-    }
 
-    @PutMapping("/order/update")
-    public ClientOrder updateOrder(@NotNull @RequestParam Long id, @RequestBody OrderCreateDTO dto) {
-        return service.updateOrder(id, dto);
+    @Autowired
+    OrderDetailsService detailsService;
+
+    @PutMapping("/order")
+    public ClientOrder saveOrder(@RequestBody OrderDTO dto) {
+        return service.saveOrder(dto);
     }
 
     @GetMapping("/order")
@@ -28,18 +28,19 @@ public class OrderController {
         return service.getOrderById(id);
     }
 
-    @GetMapping("/ordersFor")
-    public Iterable<ClientOrder> getAllOrderByCustomer(@NotNull @RequestParam Long customerId) {
-        return service.getAllOrdersForCustomerId(customerId);
-    }
-
     @GetMapping("/orders")
-    public Iterable<ClientOrder> getAllOrders() {
-        return service.getAllOrders();
+    public Iterable<ClientOrder> getAllOrderByCustomer(@Nullable @RequestParam Long customerId) {
+        if(customerId == null) return service.getAllOrders();
+        return service.getAllOrdersForCustomerId(customerId);
     }
 
     @DeleteMapping("/order")
     public void deleteOrderById(@RequestParam Long id) {
         service.deleteOrderById(id);
+    }
+
+    @GetMapping("/order/products")
+    public Iterable<OrderDetails> getOrderDetails(@RequestParam Long id){
+        return detailsService.getOrderDetails(id);
     }
 }

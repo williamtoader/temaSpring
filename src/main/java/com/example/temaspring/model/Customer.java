@@ -1,5 +1,6 @@
 package com.example.temaspring.model;
 
+import com.example.temaspring.dto.CustomerDTO;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
@@ -16,7 +17,13 @@ import java.util.List;
 
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Customer {
+    public Customer(CustomerDTO dto) {
+        this.id = dto.getId();
+        this.name = dto.getName();
+    }
 
     @NotNull
     @GeneratedValue

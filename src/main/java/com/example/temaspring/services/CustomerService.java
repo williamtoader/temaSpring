@@ -1,7 +1,6 @@
 package com.example.temaspring.services;
 
-
-import com.example.temaspring.dto.CustomerCreateDTO;
+import com.example.temaspring.dto.CustomerDTO;
 import com.example.temaspring.model.Customer;
 import com.example.temaspring.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +25,7 @@ public class CustomerService {
         repository.deleteById(id);
     }
 
-    public void updateCustomer(Customer customer) {
-        repository.save(customer);
-    }
-
-    public Customer addCustomer(Customer customer) {
-        return repository.save(customer);
+    public Customer saveCustomer(CustomerDTO dto) {
+        return repository.save(new Customer(dto));
     }
 }

@@ -14,7 +14,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class ClientOrder {
 
-    public ClientOrder(String orderText, Customer customer) {
+    public ClientOrder(Long id, String orderText, Customer customer) {
+        this.id = id;
         this.orderText = orderText;
         this.customer = customer;
     }

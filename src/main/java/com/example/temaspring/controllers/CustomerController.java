@@ -1,12 +1,10 @@
 package com.example.temaspring.controllers;
 
-import com.example.temaspring.dto.CustomerCreateDTO;
+import com.example.temaspring.dto.CustomerDTO;
 import com.example.temaspring.model.Customer;
 import com.example.temaspring.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 public class CustomerController {
@@ -14,8 +12,8 @@ public class CustomerController {
     CustomerService service;
 
     @PutMapping("/customer")
-    public Customer createCustomer(@RequestBody Customer customer) {
-        return service.addCustomer(customer);
+    public Customer createCustomer(@RequestBody CustomerDTO dto) {
+        return service.saveCustomer(dto);
     }
 
     @GetMapping("/customer")

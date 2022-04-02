@@ -1,12 +1,10 @@
 package com.example.temaspring.services;
 
-import com.example.temaspring.dto.OrderCreateDTO;
+import com.example.temaspring.dto.OrderDTO;
 import com.example.temaspring.model.ClientOrder;
 import com.example.temaspring.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class OrderService {
@@ -32,14 +30,8 @@ public class OrderService {
         repository.save(order);
     }
 
-    public ClientOrder addOrder(OrderCreateDTO dto) {
-        return repository.save(new ClientOrder(dto.orderText, customerService.getCustomerById(dto.customerId)));
-    }
-
-    public ClientOrder updateOrder(Long id, OrderCreateDTO dto) {
-        ClientOrder order = new ClientOrder(dto.orderText, customerService.getCustomerById(dto.customerId));
-        order.setId(id);
-        return repository.save(order);
+    public ClientOrder saveOrder(OrderDTO dto) {
+        return repository.save(new ClientOrder(dto.id, dto.orderText, customerService.getCustomerById(dto.customerId)));
     }
 
     public Iterable<ClientOrder> getAllOrdersForCustomerId(Long customerId) {

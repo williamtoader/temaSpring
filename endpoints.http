@@ -1,0 +1,29 @@
+### Add and update customer (id optional)
+PUT http://localhost:8080/customer
+Content-Type: application/json
+
+{"id":3,"name": "Anotha Billy"}
+### Get customer by id
+GET http://localhost:8080/customer?id=1
+### Get all customers
+GET http://localhost:8080/customers
+### Add or update order for customer (id optional)
+PUT http://localhost:8080/order
+Content-Type: application/json
+
+{
+  "id": 4,
+  "orderText": "Pere",
+  "customerId": 1
+}
+### Get all orders
+GET http://localhost:8080/orders
+
+### List all orders for customer id
+GET http://localhost:8080/orders?customerId=1
+Content-Type: application/json
+
+{
+  "orderText": "Mere",
+  "customerId": 1
+}
